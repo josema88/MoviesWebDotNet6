@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Movies.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Movies.WebApi.Controllers.MoviesController.GetMoviesAsync(System.String)">
+            <summary>
+            Get all movies, and get movies by title.
+            </summary>
+            <remarks>
+            If you didn't send parameters the endpoint will return all movies.
+            </remarks>
+            <param name="title">Movie Title</param>
+            <returns></returns>
+        </member>
+        <member name="M:Movies.WebApi.Controllers.MoviesController.GetMoviesAsync(System.Int32)">
+            <summary>
+            Get a movie by Id
+            </summary>
+            <remarks>
+            Send the Id in URI
+            </remarks>
+            <param name="id">Movie Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Movies.WebApi.Controllers.MoviesController.CreateMovieAsync(Movies.Core.Entities.Movie)">
+            <summary>
+            Create a movie
+            </summary>
+            <remarks>
+            Send the Movie data in HTTP Request's body as JSON
+            </remarks>
+            <param name="movie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Movies.WebApi.Controllers.MoviesController.UpdateMovieAsync(System.Int32,Movies.Core.Entities.Movie)">
+            <summary>
+            Update a movie
+            </summary>
+            <remarks>
+            Send the Movie data in HTTP Request's body as JSON.
+            URI Id and Movie Id within JSON sould match.
+            </remarks>
+            <param name="id">Movie Id</param>
+            <param name="movie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Movies.WebApi.Controllers.MoviesController.DeleteMovieAsync(System.Int32)">
+            <summary>
+            Delete a movie
+            </summary>
+            <remarks>
+            Send Id in the URI
+            </remarks>
+            <param name="id">Movie Id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

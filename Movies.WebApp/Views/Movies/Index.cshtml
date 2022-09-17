@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MovieViewModel>
+@{ 
+    ViewData["Title"] = "Peliculas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            @TempData["mensaje"]
+        </div>
+    }
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de peliculas</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block" asp-controller="Movies" asp-action="Create">Agregar nueva pelicula</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <form asp-controller="Movies" asp-action="Index" method="get">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="SearchString" placeholder="Titulo de pelicula" aria-label="Titulo de pelicula" aria-describedby="basic-addon2"/>
+                <div class="input-group-append">
+                    <input type="submit" value="Filtrar" class="btn btn-outline-secondary" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.Id)</td>
+                        <td>@Html.DisplayNameFor(m => m.Title)</td>
+                        <td>@Html.DisplayNameFor(m => m.Year)</td>
+                        <td>@Html.DisplayNameFor(m => m.Rating)</td>
+                        <td>@Html.DisplayNameFor(m => m.Satisfaction)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Title</td>
+                            <td>@item.Year</td>
+                            <td>@item.Rating</td>
+                            <td>@item.Satisfaction</td>
+                            <td>
+                                <a asp-controller="Movies" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                                <a asp-controller="Movies" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No existen registros de peliculas</p>
+        }
+    </div>
+
+</div>
