@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  buildAndDeploy:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -21,3 +21,10 @@ jobs:
       run: dotnet build -c Release --no-restore ./Movies.WebApp/Movies.WebApp.csproj
     - name: Test
       run: dotnet test
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./Movies.WebApp/Movies.WebApp.csproj
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: .net-app
+        path: ${{env.DOTNET_ROOT}}/myapp
