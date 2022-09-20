@@ -4,8 +4,13 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  AZURE_WEBAPP_NAME: your-app-name
+  AZURE_WEBAPP_PACKAGE_PATH: '.' 
+  DOTNET_VERSION: '2.2.402'
+
 jobs:
-  build:
+  buildAndDeploy:
 
     runs-on: ubuntu-latest
 
@@ -14,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Restore dependencies
       run: dotnet restore ./Movies.WebApp/Movies.WebApp.csproj
     - name: Build
@@ -22,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test
     - name: dotnet publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp ./Movies.WebApp/Movies.WebApp.csproj
+      run: dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp ./Movies.WebApp/Movies.WebApp.csproj
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
