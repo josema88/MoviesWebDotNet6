@@ -20,4 +20,4 @@ jobs:
     - name: Build
       run: dotnet build -c Release --no-restore ./Movies.WebApp/Movies.WebApp.csproj
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity detailed ./tests/Movies.UnitTests
+      run: dotnet test -c Release --no-build --verbosity normal ./tests/Movies.UnitTests
