@@ -32,7 +32,7 @@ namespace Movies.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = Configuration.GetConnectionString("DbConnection");
+            var connectionString = Configuration.GetConnectionString("DbConnection") ?? Configuration.GetValue<string>("ConnectionStrings:DbConnection");
             services.AddDbContext<ApplicationDbContext>(
                 //options => options.UseSqlite(connectionString)
                 options => options.UseSqlServer(connectionString)
