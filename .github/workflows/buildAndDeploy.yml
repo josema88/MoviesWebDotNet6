@@ -13,7 +13,7 @@ env:
   DOTNET_VERSION: '6.0.x'
 
 jobs:
-  buildAndDeploy:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -36,7 +36,11 @@ jobs:
       with:
         name: .net-app
         path: ${{env.DOTNET_ROOT}}/myapp
-
+  
+  Deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
       with: 
